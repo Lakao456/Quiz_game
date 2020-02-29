@@ -98,7 +98,7 @@ def sub_quiz(questions_list=None):
             print("end of ans")
             break
 
-    if input("Do you want to play again (Y/N)").lower() != 'y':
+    if input("Do you want to play again (Y/N)?:: ").lower() != 'y':
         global play
         play = False
 
