@@ -24,6 +24,7 @@ def skip_ques(question_list, i):
     question_list[i]['Given_ans'] = 'Skipped'
     print('Time elapsed: ', (time.time() - start_time) // 1, 'seconds')
 
+
 def sub_quiz(questions_list=None):
     if questions_list is None:
         questions_list = []
