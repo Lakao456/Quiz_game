@@ -6,6 +6,7 @@ subject_list = [maths_question, sci_question, gk_question]
 q_time = 5 # in Minuets
 score = 0
 
+
 def correct_ans(question_list, i):
     global score
     score += 4
