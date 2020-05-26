@@ -1,0 +1,25 @@
+{
+  "maths":
+          [
+            {
+              "question": "abc",
+              "type": "mcq",
+              "optionA": "a",
+              "optionB": "b",
+              "optionC": "c",
+              "optionD": "d",
+              "answer": "a"
+            },
+            {
+              "question": "abc",
+              "type": "true/false",
+              "answer": "t"
+            },
+            {
+              "question": "abc",
+              "type": "oneWord",
+              "answer": "xyz"
+            }
+          ]
+
+}

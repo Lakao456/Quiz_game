@@ -1,12 +1,9 @@
-import Global_Func_clone as GfuncC
 from tkinter import *
 from tkinter import messagebox
 import time
 import winsound
 from functools import partial
 import sys
-import os
-from Questions import *
 
 global questions, subject
 score, answers, op_buttons = 0, [], {}

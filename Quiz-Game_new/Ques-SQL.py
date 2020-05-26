@@ -1,3 +1,4 @@
+import os
 import json
 import mysql.connector
 
@@ -28,18 +29,18 @@ def addQues(subject='maths'):
         ans_ow = "'" + input("Enter the answer:: ")
 
     sql.execute("USE questions;")
-    sql.execute("SELECT MAX(Q_num) FROM " + subject + ";")
-    last_index = str(sql.fetchall()[0][0] + 1) + "', "
-    exe_str = "INSERT INTO " + subject + " VALUES('" + last_index + in_question + in_type + \
-              mcq_op[0] + \
-              mcq_op[1] + \
-              mcq_op[2] + \
-              mcq_op[3] + \
-              ans_mcq + \
-              ans_tf + \
-              ans_ow + ");"
-    sql.execute(exe_str)
-    quizGameDB.commit()
+    sql.execute("SELECT MAX(Q_num) FROM sci;")
+    print(sql.fetchall()[0])
+    # exe_str = "INSERT INTO " + subject + " VALUES('" + last_index + in_question + in_type + \
+    #           mcq_op[0] + \
+    #           mcq_op[1] + \
+    #           mcq_op[2] + \
+    #           mcq_op[3] + \
+    #           ans_mcq + \
+    #           ans_tf + \
+    #           ans_ow + ");"
+    # sql.execute(exe_str)
+    # quizGameDB.commit()
 
 
 def delQues(subject='maths'):
@@ -66,6 +67,7 @@ def modQues(subject='maths'):
             for p in sql.fetchall(): print(p)
         else:
             sql.execute("USE questions;")
+#NICE
             sql.execute("SELECT type FROM " + subject + " WHERE Q_num = " + in_qNum + ";")
             type = str(sql.fetchall()[0][0])
 
@@ -104,28 +106,56 @@ def modQues(subject='maths'):
 
 
 def updateJson():
-    print()
+    questions, fields_str = {}, ''
+    fields = ['question', 'type', 'optionA', 'optionB', 'optionC', 'optionD', 'ansMcq', 'ansTf', 'ansOw', ]
+    for element in range(1, len(fields)):
+        fields_str += (', ' + str(fields[element]))
+
+    for subject in ['maths', 'sci', 'gk']:
+        questions[subject] = []
+        sql.execute("USE questions;")
+        sql.execute("SELECT MAX(Q_num) FROM %s;" %subject)
+
+        for q_num in range(sql.fetchall()[0][0]):
+            print(subject, q_num)
+            single_ques = {}
+            sql.execute("USE questions;")
+            sql.execute("SELECT question%s  FROM %s WHERE q_num = %d;" % (fields_str, subject, q_num + 1))
+            field_outputs = sql.fetchall()[0]
+            if field_outputs[1] == 'mcq':
+                for i in range(7):
+                    single_ques[fields[i]] = field_outputs[i]
+            elif field_outputs[1] == 'true/false':
+                for i in [0,1,-2]:
+                    single_ques[fields[i]] = field_outputs[i]
+            elif field_outputs[1] == 'oneWord':
+                for i in [0,1,-1]:
+                    single_ques[fields[i]] = field_outputs[i]
+            questions[subject].append(single_ques)
+
+    with open("questionsTEMP.json", 'w') as tempFile:
+        json.dump(questions, tempFile, indent=4)
 
 
-subs = [None, 'maths', 'sci', 'gk']
-subject = subs[int(input("\n1) Maths"
-                         "\n2) Science"
-                         "\n3) GK"
-                         "\n4) Exit"
-                         "\nEnter your choice:: "))]
-print("---------------------------------------------------")
-menu = int(input("1) Add Question\n"
-                 "2) Delete Question\n"
-                 "3) Modify Question\n"
-                 "Enter your choice:: "))
-print("---------------------------------------------------")
-if menu == 1:
-    addQues(subject)
-elif menu == 2:
-    delQues(subject)
-elif menu == 3:
-    modQues(subject)
-else:
-    updateJson()
+# subs = [None, 'maths', 'sci', 'gk','exit']
+# subject = subs[int(input("\n1) Maths"
+#                          "\n2) Science"
+#                          "\n3) GK"
+#                          "\n4) Exit"
+#                          "\nEnter your choice:: "))]
+# print("---------------------------------------------------")
+# menu = int(input("1) Add Question\n"
+#                  "2) Delete Question\n"
+#                  "3) Modify Question\n"
+#                  "Enter your choice:: "))
+# print("---------------------------------------------------")
+# if menu == 1:
+#     addQues(subject)
+# elif menu == 2:
+#     delQues(subject)
+# elif menu == 3:
+#     modQues(subject)
+# else:
+#     updateJson()
 
 updateJson()

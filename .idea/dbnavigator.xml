@@ -23,7 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3">
+        <schema name="questions" object-types="table, view" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3">
@@ -47,11 +51,11 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$PROJECT_DIR$/Quiz-Game_new/SQL_Scripts/Create_tables.sql" connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3" session-id="MAIN" current-schema="information_schema" />
-    <mapping file-url="file://$PROJECT_DIR$/Quiz-Game_new/SQL_Scripts/Open_table.sql" connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3" session-id="MAIN" current-schema="questions" />
+    <mapping file-url="file://$PROJECT_DIR$/Quiz-Game_new/SQL_Scripts/Create_tables.sql" connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3" session-id="MAIN" current-schema="questions" />
+    <mapping file-url="file://$PROJECT_DIR$/Quiz-Game_new/SQL_Scripts/MISC.sql" connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3" session-id="MAIN" current-schema="questions" />
     <mapping file-url="file://$PROJECT_DIR$/Quiz-Game_new/SQL_Scripts/Clear_all_tables.sql" connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3" session-id="MAIN" current-schema="questions" />
     <mapping file-url="file://$PROJECT_DIR$/Quiz-Game_new/SQL_Scripts/Insert_fake_values.sql" connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3" session-id="MAIN" current-schema="questions" />
-    <mapping file-url="file://$PROJECT_DIR$/Quiz-Game_new/SQL_Scripts/MISC.sql" connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3" session-id="MAIN" current-schema="questions" />
+    <mapping file-url="file://$PROJECT_DIR$/Quiz-Game_new/SQL_Scripts/Open_table.sql" connection-id="cde12ce9-2a2c-4d47-aa7b-1254fd6c44a3" session-id="MAIN" current-schema="questions" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />

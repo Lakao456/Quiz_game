@@ -1,3 +1,3 @@
 USE questions;
 
-SELECT * FROM maths;
+SELECT * FROM sci;
