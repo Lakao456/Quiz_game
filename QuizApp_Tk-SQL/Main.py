@@ -1,12 +1,12 @@
-import os
 import json
-from tkinter import *
-from tkinter import ttk
-import mysql.connector
+import os
 from functools import partial
-from PIL import ImageTk,Image
+from tkinter import *
 from tkinter import messagebox
+
 import matplotlib.pyplot as plt
+import mysql.connector
+from PIL import ImageTk, Image
 
 global subject
 marks, theme = 0, 'Light'
@@ -36,23 +36,24 @@ def sql(exe=''):
 
 
 def themeCol(dark, light):
-    if theme == 'Dark': return dark
-    else: return light
+    if theme == 'Dark':
+        return dark
+    else:
+        return light
 
 
 def insert_image(object, image, adjW=0, adjH=0):
-
     def resize_image(event):
         new_width = event.width
         new_height = event.height
-        image = copyOfImage.resize((new_width+adjW, new_height+adjH), Image.ANTIALIAS)
+        image = copyOfImage.resize((new_width + adjW, new_height + adjH), Image.ANTIALIAS)
         photo = ImageTk.PhotoImage(image)
         object.config(image=photo)
         object.image = photo
 
     inImage = Image.open(image)
     copyOfImage = inImage.copy()
-    object.config(image = ImageTk.PhotoImage(inImage), borderwidth=0)
+    object.config(image=ImageTk.PhotoImage(inImage), borderwidth=0)
     object.bind('<Configure>', resize_image)
 
 
@@ -67,13 +68,14 @@ def setSub(sub, root):
 def displayQues(qNum):
     global question_number_label, question_statement_label, options_frame
 
-    question_number_label.configure(text='Q %d.' % (qNum+1))
-    question_statement_label.config(text=sql("SELECT question FROM %s WHERE Q_num = %d" % (subject, qNum+1)), font=('Arial', 20))
+    question_number_label.configure(text='Q %d.' % (qNum + 1))
+    question_statement_label.config(text=sql("SELECT question FROM %s WHERE Q_num = %d" % (subject, qNum + 1)),
+                                    font=('Arial', 20))
 
     for i in range(len(opElements)):
         for j in opElements[i]:
             j.place_forget()
-    qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum+1))[0][0]
+    qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum + 1))[0][0]
     if qType == 'mcq':
         for i in range(4):
             opElements[qNum][i].place(relx=(0.05 if i % 2 == 0 else 0.55), rely=(0.05 if i <= 1 else 0.5),
@@ -87,7 +89,7 @@ def displayQues(qNum):
 
 
 def recordAns(qNum, ans):
-    answers[qNum], qType = ans, sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum+1))[0][0]
+    answers[qNum], qType = ans, sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum + 1))[0][0]
     if qType in 'mcq true/false':
         for i in range(len(opElements[qNum])):
             opElements[qNum][i].configure(bg=('#8c8c8c' if i == ans else '#fff'))
@@ -98,7 +100,7 @@ def submit(root):
     global marks, name, pie
     pie = {'Correct': 0, 'Wrong': 0, 'Unattempted': len(answers)}
     for qNum in range(len(answers)):
-        qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum+1))[0][0]
+        qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum + 1))[0][0]
         if qType == 'mcq':
             answers[qNum] = chr(97 + answers[qNum])
 
@@ -108,7 +110,7 @@ def submit(root):
             if opElements[qNum][1].get() != '':
                 answers[qNum] = opElements[qNum][1].get()
 
-        if answers[qNum] == sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, qNum+1))[0][0]:
+        if answers[qNum] == sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, qNum + 1))[0][0]:
             marks += 4
             pie['Correct'] += 1
             pie['Unattempted'] -= 1
@@ -124,7 +126,7 @@ def submit(root):
 
     if (
             0 if not scores[subject] else (
-            max([scores[subject][i]['score'] for i in range(len(scores[subject]))]))) >= marks:
+                    max([scores[subject][i]['score'] for i in range(len(scores[subject]))]))) >= marks:
         messagebox.showinfo(title='Score', message='Your Score is %d !' % marks)
     else:
         messagebox.showinfo(title='Score', message='NEW TOP SCORE ! \nYour Score is %d' % marks)
@@ -195,7 +197,6 @@ def on_closing():
 select_sub_main.protocol("WM_DELETE_WINDOW", on_closing)
 select_sub_main.mainloop()
 
-
 quiz_main = Tk()
 quiz_main.title('TESTS')
 quiz_main.geometry('1000x700')
@@ -204,12 +205,13 @@ bgImage = Label(quiz_main)
 insert_image(bgImage, f"Assets\\{theme}Theme\\{theme}_BG.png")
 bgImage.place(relwidth=1, relheight=1)
 
-
-question_number_label = Label(quiz_main, bg=themeCol('#202020', '#6200EE'), fg=themeCol('#f2f2f2', '#fff'), font=('Montserrat', 50))
+question_number_label = Label(quiz_main, bg=themeCol('#202020', '#6200EE'), fg=themeCol('#f2f2f2', '#fff'),
+                              font=('Montserrat', 50))
 question_number_label.place(relx=0.065, rely=0.085, relheight=0.17, relwidth=0.13, anchor='nw')
 
 # qLen = len(sql("SELECT question FROM %s WHERE Q_num = 1" % subject)[0][0])
-question_statement_label = Label(quiz_main, bg=themeCol('#1b1b1b', '#fff'), anchor='nw', fg=themeCol('#f2f2f2', '#1b1b1b'),
+question_statement_label = Label(quiz_main, bg=themeCol('#1b1b1b', '#fff'), anchor='nw',
+                                 fg=themeCol('#f2f2f2', '#1b1b1b'),
                                  font=('Montserrat', 30))
 question_statement_label.place(relx=0.25, rely=0.1, relheight=0.15, relwidth=0.72, anchor='nw')
 
@@ -225,12 +227,13 @@ for i in range(numOfQues):
     answers.append(None)
 
 for qNum in range(numOfQues):
-    
-    qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum+1))[0][0]
+
+    qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum + 1))[0][0]
     if qType == 'mcq':
 
         for bNum in range(4):
-            opElements[qNum].append(Button(options_frame, text=sql("SELECT option%s FROM %s WHERE Q_num = %d" % (chr(65 + bNum), subject, qNum+1))[0][0], bg='#fff',
+            opElements[qNum].append(Button(options_frame, text=
+            sql("SELECT option%s FROM %s WHERE Q_num = %d" % (chr(65 + bNum), subject, qNum + 1))[0][0], bg='#fff',
                                            command=partial(recordAns, qNum, bNum)))
 
     elif qType == 'true/false':
@@ -242,8 +245,8 @@ for qNum in range(numOfQues):
         opElements[qNum].append(Label(options_frame, text='Enter your answer'))
         opElements[qNum].append(Entry(options_frame))
 
-
-submit_button = Button(quiz_main, command=partial(submit, quiz_main), bg=themeCol('#1B1B1B', '#f2f2f2'), activebackground=themeCol('#1B1B1B', '#f2f2f2'))
+submit_button = Button(quiz_main, command=partial(submit, quiz_main), bg=themeCol('#1B1B1B', '#f2f2f2'),
+                       activebackground=themeCol('#1B1B1B', '#f2f2f2'))
 insert_image(submit_button, f"Assets\\{theme}Theme\\{theme}_SubBtn_Hover.png")
 submit_button.place(relx=0.81, rely=0.87, relheight=0.095, relwidth=0.15, anchor='nw')
 

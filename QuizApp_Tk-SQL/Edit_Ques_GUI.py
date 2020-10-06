@@ -2,9 +2,9 @@ from functools import partial
 from tkinter import *
 from tkinter import messagebox
 from tkinter.scrolledtext import *
-from PIL import Image, ImageTk
 
 import mysql.connector
+from PIL import Image, ImageTk
 
 global subject
 marks = 0
@@ -130,8 +130,9 @@ def on_closing():
 
 
 def submit(root):
-    img = ImageTk.PhotoImage(Image.open('C:\\Users\\Aman\\PycharmProjects\\Quiz App\\QuizApp_Tk-SQL\\Assets\\DarkLightSwitch\\logo.jpg'))
-    question_number_label.configure(image = img)
+    img = ImageTk.PhotoImage(
+        Image.open('C:\\Users\\Aman\\PycharmProjects\\Quiz App\\QuizApp_Tk-SQL\\Assets\\DarkLightSwitch\\logo.jpg'))
+    question_number_label.configure(image=img)
     # for q_num in range(numOfQues):
     #     qStatement = question_statement_entry[q_num].get('1.0', 'end-1c')
     #     qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, q_num + 1))[0][0]
@@ -152,7 +153,7 @@ quiz_main = Tk()
 quiz_main.title('TESTS')
 quiz_main.geometry('1000x700')
 quiz_main.configure(bg="#85c6dd")
-#, bg='#80c1ff'
+# , bg='#80c1ff'
 question_number_label = Label(quiz_main, font=('Arial', 30))
 question_number_label.place(relx=0.03, rely=0.03, relheight=0.24, relwidth=0.2, anchor='nw')
 

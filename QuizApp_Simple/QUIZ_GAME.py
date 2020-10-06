@@ -1,9 +1,10 @@
 import time
+
 from Questions import *
 
 subject_list = [maths_question, sci_question, gk_question]
 
-q_time = 5 # in Minuets
+q_time = 5  # in Minuets
 score = 0
 
 
@@ -39,7 +40,7 @@ def sub_quiz(questions_list=None):
             print(questions_list[i]['options'])
             while True:
                 input_ans = input('Enter your answer (a,b,c,d):: ')
-                if input_ans.lower() in ['a','b','c','d']:
+                if input_ans.lower() in ['a', 'b', 'c', 'd']:
                     if questions_list[i]['answer'] in input_ans.lower():
                         correct_ans(questions_list, i)
                         break
@@ -66,7 +67,6 @@ def sub_quiz(questions_list=None):
                     else:
                         print('wrong input')
 
-
                 if questions_list[i]['answer'] == 'false':
                     if 'f' in input_ans.lower() or 'n' in input_ans.lower():
                         correct_ans(questions_list, i)
@@ -86,10 +86,10 @@ def sub_quiz(questions_list=None):
             else:
                 wrong_ans(questions_list, i)
 
-    end_time = (time.time() - start_time)//1
+    end_time = (time.time() - start_time) // 1
     print("Quiz Over ! \n",
           "your score is ", score,
-          "\n you completed the quiz in ", end_time,"seconds")
+          "\n you completed the quiz in ", end_time, "seconds")
 
     print("Your correctness")
     for i in range(len(questions_list)):
@@ -110,9 +110,9 @@ while play:
     print("1--Maths",
           "2--Science",
           "3--General knowledge",
-          sep='\n',end="\n ----------------------------- \n")
+          sep='\n', end="\n ----------------------------- \n")
     try:
-        subject = subject_list[ int(input("Select a subject:: ")) - 1]
+        subject = subject_list[int(input("Select a subject:: ")) - 1]
     except IndexError:
         print("Wrong input")
         continue
