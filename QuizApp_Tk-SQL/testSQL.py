@@ -31,27 +31,23 @@
 # input('aa::')
 from tkinter import *
 from tkinter import ttk
-import mysql.connector
-from functools import partial
-from PIL import ImageTk,Image
 
+from PIL import ImageTk, Image
 
 
 def insert_image(object, image, adjW=0, adjH=0):
-
     def resize_image(event):
         new_width = event.width
         new_height = event.height
-        image = copyOfImage.resize((new_width+adjW, new_height+adjH), Image.ANTIALIAS)
+        image = copyOfImage.resize((new_width + adjW, new_height + adjH), Image.ANTIALIAS)
         photo = ImageTk.PhotoImage(image)
         object.config(image=photo)
         object.image = photo
 
     inImage = Image.open(image)
     copyOfImage = inImage.copy()
-    object.config(image = ImageTk.PhotoImage(inImage), borderwidth=0)
+    object.config(image=ImageTk.PhotoImage(inImage), borderwidth=0)
     object.bind('<Configure>', resize_image)
-
 
 
 quiz_main = Tk()
@@ -65,6 +61,5 @@ bgImageLabel.place(relwidth=1, relheight=1)
 btn = Button(quiz_main, bg='#1B1B1B', activebackground='#1B1B1B')
 insert_image(btn, "Assets\\DarkTheme\\Dark_SubBtn_Hover.png")
 btn.place(relx=0.82, rely=0.872, relheight=0.095, relwidth=0.15, anchor='nw')
-
 
 mainloop()

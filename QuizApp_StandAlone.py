@@ -1,45 +1,44 @@
 import time
 
-maths_question = [{'type' : 'mcq', 'question' :'abc', 'answer' : 'a', 'options' : 'A) opa B) opb C) D)' },
-                  {'type' : 'mcq', 'question' :'abc', 'answer' : 'b', 'options' : 'A) opa B) opb C) D)' },
-                  {'type' : 'true/false', 'question' :'abc', 'answer' : 'true'},
-                  {'type' : 'true/false', 'question' :'abc', 'answer' : 'false'},
-                  {'type' : 'one word', 'question' :'abc', 'answer' : 'xyz'},
-                  {'type' : 'one word', 'question' :'abc', 'answer' : 'xyz'}]
+maths_question = [{'type': 'mcq', 'question': 'abc', 'answer': 'a', 'options': 'A) opa B) opb C) D)'},
+                  {'type': 'mcq', 'question': 'abc', 'answer': 'b', 'options': 'A) opa B) opb C) D)'},
+                  {'type': 'true/false', 'question': 'abc', 'answer': 'true'},
+                  {'type': 'true/false', 'question': 'abc', 'answer': 'false'},
+                  {'type': 'one word', 'question': 'abc', 'answer': 'xyz'},
+                  {'type': 'one word', 'question': 'abc', 'answer': 'xyz'}]
 
-sci_question = [{'type' : 'mcq', 'question' :'abc', 'answer' : 'xyz', 'options' : 'A) opa B) opb C) D)' },
-                  {'type' : 'mcq', 'question' :'abc', 'answer' : 'xyz', 'options' : 'A) opa B) opb C) D)' },
-                  {'type' : 'true/false', 'question' :'abc', 'answer' : 'true'},
-                  {'type' : 'true/false', 'question' :'abc', 'answer' : 'false'},
-                  {'type' : 'one word', 'question' :'abc', 'answer' : 'xyz'},
-                  {'type' : 'one word', 'question' :'abc', 'answer' : 'xyz'}]
+sci_question = [{'type': 'mcq', 'question': 'abc', 'answer': 'xyz', 'options': 'A) opa B) opb C) D)'},
+                {'type': 'mcq', 'question': 'abc', 'answer': 'xyz', 'options': 'A) opa B) opb C) D)'},
+                {'type': 'true/false', 'question': 'abc', 'answer': 'true'},
+                {'type': 'true/false', 'question': 'abc', 'answer': 'false'},
+                {'type': 'one word', 'question': 'abc', 'answer': 'xyz'},
+                {'type': 'one word', 'question': 'abc', 'answer': 'xyz'}]
 
-gk_question = [{'type' : 'mcq', 'question' :'abc', 'answer' : 'xyz', 'options' : 'A) opa B) opb C) D)' },
-                  {'type' : 'mcq', 'question' :'abc', 'answer' : 'xyz', 'options' : 'A) opa B) opb C) D)' },
-                  {'type' : 'true/false', 'question' :'abc', 'answer' : 'true'},
-                  {'type' : 'true/false', 'question' :'abc', 'answer' : 'false'},
-                  {'type' : 'one word', 'question' :'abc', 'answer' : 'xyz'},
-                  {'type' : 'one word', 'question' :'abc', 'answer' : 'xyz'}]
+gk_question = [{'type': 'mcq', 'question': 'abc', 'answer': 'xyz', 'options': 'A) opa B) opb C) D)'},
+               {'type': 'mcq', 'question': 'abc', 'answer': 'xyz', 'options': 'A) opa B) opb C) D)'},
+               {'type': 'true/false', 'question': 'abc', 'answer': 'true'},
+               {'type': 'true/false', 'question': 'abc', 'answer': 'false'},
+               {'type': 'one word', 'question': 'abc', 'answer': 'xyz'},
+               {'type': 'one word', 'question': 'abc', 'answer': 'xyz'}]
 
 play = True
-q_time = 0.5 # in Minuets
+q_time = 0.5  # in Minuets
 
 while play:
     start_time = time.time()
     game_end = False
-    while time.time() - start_time <= 60*q_time and not game_end:
+    while time.time() - start_time <= 60 * q_time and not game_end:
         print("1--Maths",
               "2--Science",
               "3--General knowledge",
-              sep='\n',end="\n ----------------------------- \n")
+              sep='\n', end="\n ----------------------------- \n")
 
-        subject, score= int(input("Select a subject:: ")), 0
+        subject, score = int(input("Select a subject:: ")), 0
 
         if subject == 1:
             for i in range(len(maths_question)):
                 print("----------------------------------------------------------------------------------")
-                print('Question ', i+1, ') ', maths_question[i]['question'])
-
+                print('Question ', i + 1, ') ', maths_question[i]['question'])
 
                 if maths_question[i]['type'] == 'mcq':
                     print(maths_question[i]['options'])
@@ -48,7 +47,7 @@ while play:
                     if maths_question[i]['answer'] in input_ans.lower():
                         score += 4
                         maths_question[i]['Given_ans'] = 'correct'
-                        print ('Time elapsed: ', (time.time()-start_time)//1)
+                        print('Time elapsed: ', (time.time() - start_time) // 1)
                     else:
                         score -= 1
                         maths_question[i]['Given_ans'] = 'Wrong'
@@ -244,21 +243,21 @@ while play:
     print("Your correctness")
 
     if subject == 1:
-        for i in range (len(maths_question)):
+        for i in range(len(maths_question)):
             try:
-                print('Ans ', i+1, ') ', maths_question[i]["Given_ans"])
+                print('Ans ', i + 1, ') ', maths_question[i]["Given_ans"])
             except:
                 print("end of ans")
     if subject == 2:
-        for i in range (len(sci_question)):
+        for i in range(len(sci_question)):
             try:
-                print('Ans ', i+1, ') ', sci_question[i]["Given_ans"])
+                print('Ans ', i + 1, ') ', sci_question[i]["Given_ans"])
             except:
                 print("end of ans")
     if subject == 3:
-        for i in range (len(gk_question)):
+        for i in range(len(gk_question)):
             try:
-                print('Ans ', i+1, ') ', gk_question[i]["Given_ans"])
+                print('Ans ', i + 1, ') ', gk_question[i]["Given_ans"])
             except:
                 print("end of ans")
 

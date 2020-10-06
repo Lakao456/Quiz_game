@@ -1,5 +1,6 @@
-import os
 import json
+import os
+
 import mysql.connector
 
 quizAppDB = mysql.connector.connect(
@@ -9,7 +10,6 @@ quizAppDB = mysql.connector.connect(
     database="questions")
 sql = quizAppDB.cursor()
 line_break = '\n----------------------------------------------------------------------\n'
-
 
 
 def checkInput(value_type, msg="Enter a value"):
@@ -25,7 +25,8 @@ def checkInput(value_type, msg="Enter a value"):
                     break
             except ValueError:
                 print("**Invalid input**1")
-        else: print("**Invalid input**1")
+        else:
+            print("**Invalid input**1")
 
     return value
 
@@ -66,6 +67,7 @@ def addQues(subject):
 
         if 'n' in input("Do you want to add another question? (y/n):: ").lower():
             break
+
 
 def delQues(subject):
     sql.execute("USE questions;")
@@ -138,7 +140,8 @@ def modQues(subject='maths'):
                 sql.execute("USE questions;")
                 sql.execute("UPDATE %s SET %s = '%s' WHERE Q_num = %d" % (subject, in_option, new_value, in_qNum))
                 quizAppDB.commit()
-            else: break
+            else:
+                break
         if 'n' in input("Modify another value? (y/n):: ").lower(): break
 
 
