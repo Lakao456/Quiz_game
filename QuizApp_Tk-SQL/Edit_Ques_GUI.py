@@ -7,12 +7,12 @@ from PIL import Image, ImageTk
 import mysql.connector
 
 global subject
-marks = 0
+marks, theme = 0, 'Light'
 
 quizAppDB = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="aman.singh456",
+    passwd="12345678",
     database="questions")
 SQL = quizAppDB.cursor()
 
@@ -120,7 +120,6 @@ for i in range(len(subButtons)):
     subButtons[i] = Button(midFrame, text=subButtons[i].upper(), font=('Autobus', 15),
                            command=partial(setSub, subButtons[i], select_sub_main))
     subButtons[i].place(relx=0.02, rely=y, relwidth=0.96, relheight=0.2)
-
     y += 0.25
 
 

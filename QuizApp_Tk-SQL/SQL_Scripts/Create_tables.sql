@@ -13,7 +13,7 @@ answer 	 VARCHAR(100) NOT NULL
 );
 
 DROP TABLE IF EXISTS sci;
-CREATE TABLE scimainshipper
+CREATE TABLE sci
 (
 Q_num    INT		  PRIMARY KEY,
 question VARCHAR(255) NOT NULL,

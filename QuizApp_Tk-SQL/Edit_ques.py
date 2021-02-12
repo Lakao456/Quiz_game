@@ -5,7 +5,7 @@ import mysql.connector
 quizAppDB = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="aman.singh456",
+    passwd="12345678",
     database="questions")
 sql = quizAppDB.cursor()
 line_break = '\n----------------------------------------------------------------------\n'
