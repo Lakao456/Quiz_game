@@ -241,8 +241,8 @@ question_statement_label.place(relx=0.25, rely=0.1, relheight=0.15, relwidth=0.7
 question_buttons_frame = Frame(quiz_main, bg=themeCol('#202020', '#f2f2f2'))
 question_buttons_frame.place(relx=0.03, rely=0.3, relheight=0.64, relwidth=0.19, anchor='nw')
 
-options_frame = Frame(quiz_main, bg='#3c3c3c')
-options_frame.place(relx=0.25, rely=0.3, relheight=0.47, relwidth=0.72, anchor='nw')
+options_frame = Frame(quiz_main, bg='#121212')
+options_frame.place(relx=0.25, rely=0.3, relheight=0.55, relwidth=0.72, anchor='nw')
 
 numOfQues, answers, opElements = sql("SELECT max(Q_num) FROM %s" % subject)[0][0], [], []
 for i in range(numOfQues):
@@ -256,17 +256,19 @@ for qNum in range(numOfQues):
 
         for bNum in range(4):
             opElements[qNum].append(Button(options_frame, text=
-            sql("SELECT option%s FROM %s WHERE Q_num = %d" % (chr(65 + bNum), subject, qNum + 1))[0][0], bg='#fff',
+            sql("SELECT option%s FROM %s WHERE Q_num = %d" % (chr(65 + bNum), subject, qNum + 1))[0][0], bg=themeCol('#121212', '#fff'),  fg=themeCol('#fff', '#121212'),
                                            command=partial(recordAns, qNum, bNum)))
+            insert_image(opElements[qNum][bNum], f"Assets\\{theme}Theme\\{theme}_OpBtn_Off.png")
 
     elif qType == 'true/false':
         for bNum in range(2):
-            opElements[qNum].append(Button(options_frame, text=('True' if bNum == 0 else 'False'), bg='#fff',
+            opElements[qNum].append(Button(options_frame, text=('True' if bNum == 0 else 'False'),  bg=themeCol('#121212', '#fff'),  fg=themeCol('#fff', '#121212'),
                                            command=partial(recordAns, qNum, bNum)))
+            insert_image(opElements[qNum][bNum], f"Assets\\{theme}Theme\\{theme}_OpBtn_Off.png")
 
     else:
-        opElements[qNum].append(Label(options_frame, text='Enter your answer'))
-        opElements[qNum].append(Entry(options_frame))
+        opElements[qNum].append(Label(options_frame, text='Enter your answer',  bg=themeCol('#121212', '#fff'),  fg=themeCol('#fff', '#121212'), font=('Montserrat', 14)))
+        opElements[qNum].append(Entry(options_frame,  bg=themeCol('#121212', '#fff'),  fg=themeCol('#fff', '#121212'), font=('Montserrat', 13)))
 
 submit_button = Button(quiz_main, command=partial(submit, quiz_main), bg=themeCol('#1B1B1B', '#f2f2f2'),
                        activebackground=themeCol('#1B1B1B', '#f2f2f2'))
@@ -277,7 +279,8 @@ displayQues(0)
 
 qBtnLen, qBtnList, y = numOfQues, [], 0.005
 for i in range(qBtnLen):
-    qBtnList.append(Button(question_buttons_frame, text=str(i + 1), relief='ridge', command=partial(displayQues, i)))
+    qBtnList.append(Button(question_buttons_frame, text=str(i + 1), relief='ridge', bg=themeCol('#202020', '#f2f2f2'), command=partial(displayQues, i)))
+    insert_image(qBtnList[i], f"Assets\\{theme}Theme\\{theme}_quBtn_Off.png")
     qBtnList[i].place(relx=(0.03 if i % 2 == 0 else 0.5), rely=y, relwidth=0.45, relheight=0.085)
     if i % 2 != 0: y += 0.1
 
