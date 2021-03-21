@@ -2,16 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_EdtBtn_Off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_EdtBtn_On.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_Entry.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_SubBtn_Hover-15.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-26.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-27.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-28.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_Entry.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Dark_BG.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Light_BG.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Light_Shadow.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_BG.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_EdtBtn_Off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_EdtBtn_On.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_Entry.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_Main.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_OpBtn_Hover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_OpBtn_Off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_OpBtn_On.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_QuBtn_Hover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_QuBtn_Off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_QuBtn_On.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_SubBtn_Hover-15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_SubBtn_Hover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_SubBtn_Off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_BG.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_Entry.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_Main.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_OpBtn_Hover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_OpBtn_Off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_OpBtn_On.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_QuBtn_Hover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_QuBtn_Off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_QuBtn_On.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_SubBtn_Hover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_SubBtn_Off.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +59,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\amans\PycharmProjects\Quiz_game\QuizApp_Tk-SQL\Assets" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.Main">
     <configuration name="Edit_Ques_GUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -103,8 +135,8 @@
     </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
-      <item itemvalue="Python.Main" />
       <item itemvalue="Python.Edit_Ques_GUI" />
+      <item itemvalue="Python.Main" />
     </list>
     <recent_temporary>
       <list>
@@ -156,5 +188,16 @@
     <MESSAGE value="Removed Unnecessary Files" />
     <MESSAGE value="Added Admin and theme switch buttons" />
     <option name="LAST_COMMIT_MESSAGE" value="Added Admin and theme switch buttons" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
+          <line>122</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
