@@ -1,3 +1,29 @@
+import sys
+import time
+from functools import partial
+import threading
+def func():
+    print("This is the function you called")
+    sys.exit()
+
+def timer(seconds):
+    while seconds > 0:
+        print(f"{seconds//60}:{seconds}")
+        time.sleep(1)
+        seconds -= 1
+
+startTime = threading.Timer(10, func)
+startTime.start()
+
+timerThread = threading.Thread(target=partial(timer, 10))
+timerThread.start()
+
+for _ in range(20):
+    print('Running')
+    time.sleep(1)
+
+# timerThread.join()
+
 # import mysql.connector
 #
 # quizAppDB = mysql.connector.connect(

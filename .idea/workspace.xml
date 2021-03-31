@@ -1,42 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Dark_BG.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Light_BG.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Light_Shadow.png" afterDir="false" />
+    <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="Removed Pictures for buttons&#10;Used frame in bg for border effect">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/amans.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_BG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_EdtBtn_Off.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_EdtBtn_On.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_Entry.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_Main.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_OpBtn_Hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_OpBtn_Off.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_OpBtn_On.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_QuBtn_Hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_QuBtn_Off.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_QuBtn_On.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_SubBtn_Hover-15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_SubBtn_Hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/DarkTheme/Dark_SubBtn_Off.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_BG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-26.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_EdtBtn_On-28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_Entry.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_Main.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_OpBtn_Hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_OpBtn_Off.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_OpBtn_On.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_QuBtn_Hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_QuBtn_Off.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_QuBtn_On.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_SubBtn_Hover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/LightTheme/Light_SubBtn_Off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/testSQL.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/testSQL.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,15 +107,38 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="testSQL" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Quiz App" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QuizApp_Tk-SQL" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QuizApp_Tk-SQL/testSQL.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
       <item itemvalue="Python.Edit_Ques_GUI" />
       <item itemvalue="Python.Main" />
+      <item itemvalue="Python.testSQL" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Main" />
         <item itemvalue="Python.Edit_Ques_GUI" />
+        <item itemvalue="Python.testSQL" />
       </list>
     </recent_temporary>
   </component>
@@ -168,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613155889373</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Removed Pictures for buttons&#10;Used frame in bg for border effect">
+      <created>1616330927012</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1616330927012</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,15 +191,26 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Removed Unnecessary Files" />
     <MESSAGE value="Added Admin and theme switch buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Admin and theme switch buttons" />
+    <MESSAGE value="Removed Pictures for buttons&#10;Used frame in bg for border effect" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed Pictures for buttons&#10;Used frame in bg for border effect" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>122</line>
+          <line>366</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
+          <line>130</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
+          <line>191</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

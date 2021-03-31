@@ -3,7 +3,6 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter.scrolledtext import *
 from PIL import Image, ImageTk
-
 import mysql.connector
 
 global subject
@@ -35,14 +34,14 @@ def setSub(sub, root):
         window.eval('tk::PlaceWindow %s center' % window.winfo_toplevel())
         window.withdraw()
 
-        messagebox.showinfo(title='Score', message='incorrect Password')
+        messagebox.showinfo(title='Error', message='incorrect Password')
 
         window.deiconify()
         window.destroy()
 
 
 def displayQues(q_num):
-    global question_number_label, question_statement_label, options_frame, lastQuesEntry
+    global questionNumberLabel, questionStatementLabel, optionsFrame, lastQuesEntry
 
     question_statement_entry[q_num].place(relx=0.25, rely=0.18, relheight=0.09, relwidth=0.72, anchor='nw')
     question_number_label.configure(text='Q %d' % (q_num + 1))
@@ -130,7 +129,7 @@ def on_closing():
 
 def submit(root):
     img = ImageTk.PhotoImage(Image.open('C:\\Users\\Aman\\PycharmProjects\\Quiz App\\QuizApp_Tk-SQL\\Assets\\DarkLightSwitch\\logo.jpg'))
-    question_number_label.configure(image = img)
+    questionNumberLabel.configure(image = img)
     # for q_num in range(numOfQues):
     #     qStatement = question_statement_entry[q_num].get('1.0', 'end-1c')
     #     qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, q_num + 1))[0][0]
@@ -152,19 +151,19 @@ quiz_main.title('TESTS')
 quiz_main.geometry('1000x700')
 quiz_main.configure(bg="#85c6dd")
 #, bg='#80c1ff'
-question_number_label = Label(quiz_main, font=('Arial', 30))
-question_number_label.place(relx=0.03, rely=0.03, relheight=0.24, relwidth=0.2, anchor='nw')
+questionNumberLabel = Label(quiz_main, font=('Arial', 30))
+questionNumberLabel.place(relx=0.03, rely=0.03, relheight=0.24, relwidth=0.2, anchor='nw')
 
 qLen = len(sql("SELECT question FROM %s WHERE Q_num = 1;" % subject)[0][0])
-question_statement_label = Label(quiz_main, bg='#ffcccc', anchor='nw',
-                                 font=('Arial', 1200 // qLen))
-question_statement_label.place(relx=0.25, rely=0.03, relheight=0.14, relwidth=0.72, anchor='nw')
+questionStatementLabel = Label(quiz_main, bg='#ffcccc', anchor='nw',
+                               font=('Arial', 1200 // qLen))
+questionStatementLabel.place(relx=0.25, rely=0.03, relheight=0.14, relwidth=0.72, anchor='nw')
 
 question_buttons_frame = Frame(quiz_main, bg='#fcfcfc')
 question_buttons_frame.place(relx=0.03, rely=0.3, relheight=0.6, relwidth=0.2, anchor='nw')
 
-options_frame = Frame(quiz_main, bg='#3c3c3c')
-options_frame.place(relx=0.25, rely=0.3, relheight=0.47, relwidth=0.72, anchor='nw')
+optionsFrame = Frame(quiz_main, bg='#3c3c3c')
+optionsFrame.place(relx=0.25, rely=0.3, relheight=0.47, relwidth=0.72, anchor='nw')
 
 numOfQues, opElements, question_statement_entry = sql("SELECT max(Q_num) FROM %s" % subject)[0][0], [], []
 for i in range(numOfQues):
@@ -176,24 +175,24 @@ for q_num in range(numOfQues):
     if qType == 'mcq':
         for opNum in range(4):
             opElements[q_num].append([])
-            opElements[q_num][opNum].append(Label(options_frame, text=
+            opElements[q_num][opNum].append(Label(optionsFrame, text=
             sql("SELECT option%s FROM %s WHERE Q_num = %d" % (chr(65 + opNum), subject, q_num + 1))[0][0]))
-            opElements[q_num][opNum].append(Entry(options_frame))
-            opElements[q_num][opNum].append(Button(options_frame, bg='#0cfc0c' if
+            opElements[q_num][opNum].append(Entry(optionsFrame))
+            opElements[q_num][opNum].append(Button(optionsFrame, bg=themeCol('#BB86FC', '#6200EE') if
             sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, q_num + 1))[0][0] == chr(
-                65 + opNum).lower() else '#8c8c8c', command=partial(recordAns, q_num, opNum)))
+                65 + opNum).lower() else themeCol('#3C4042', '#8d8d8d'), command=partial(recordAns, q_num, opNum)))
     elif qType == 'true/false':
         tfL = ['t', 'f']
         for bNum in range(2):
-            opElements[q_num].append(Button(options_frame, text=('True' if bNum == 0 else 'False'), bg='#0cfc0c' if
+            opElements[q_num].append(Button(optionsFrame, text=('True' if bNum == 0 else 'False'), bg='#0cfc0c' if
             sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, q_num + 1))[0][0] == tfL[bNum] else '#8c8c8c',
                                             command=partial(recordAns, q_num, bNum)))
 
     else:
-        opElements[q_num].append(Label(options_frame, text='Enter any new answer in the space given'))
+        opElements[q_num].append(Label(optionsFrame, text='Enter any new answer in the space given'))
         opElements[q_num].append(
-            Label(options_frame, text=sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, q_num + 1))[0][0]))
-        opElements[q_num].append(Entry(options_frame))
+            Label(optionsFrame, text=sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, q_num + 1))[0][0]))
+        opElements[q_num].append(Entry(optionsFrame))
 
 displayQues(0)
 
