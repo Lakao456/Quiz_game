@@ -4,13 +4,12 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="Removed Pictures for buttons&#10;Used frame in bg for border effect">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/amans.xml" afterDir="false" />
+    <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="Integrated Admin options in Main.py&#10;Not connected to sql actions yet">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/testSQL.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/testSQL.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +18,21 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectId" id="1oODNzXq1eqohbI2njgQtJR1fNP" />
   <component name="ProjectLevelVcsManager">
@@ -172,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616330927012</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Integrated Admin options in Main.py&#10;Not connected to sql actions yet">
+      <created>1617232636612</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1617232636612</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,25 +213,31 @@
     <MESSAGE value="Removed Unnecessary Files" />
     <MESSAGE value="Added Admin and theme switch buttons" />
     <MESSAGE value="Removed Pictures for buttons&#10;Used frame in bg for border effect" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed Pictures for buttons&#10;Used frame in bg for border effect" />
+    <MESSAGE value="Integrated Admin options in Main.py&#10;Not connected to sql actions yet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrated Admin options in Main.py&#10;Not connected to sql actions yet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>366</line>
-          <option name="timeStamp" value="1" />
+          <line>557</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>130</line>
-          <option name="timeStamp" value="2" />
+          <line>360</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>191</line>
-          <option name="timeStamp" value="3" />
+          <line>121</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
+          <line>116</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

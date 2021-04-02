@@ -101,7 +101,7 @@ select_sub_main.configure(bg="#000")  # 85c6dd
 topFrame = Frame(select_sub_main, bg='#85c6dd')
 topFrame.place(relx=0.1, rely=0.03, relheight=0.3, relwidth=0.8)
 
-titleLabel = Label(topFrame, text='Enter the password', bg='#85c6dd', font=('Autobus', 18))
+titleLabel = Label(topFrame, text='Enter the password', bg='#85c6dd', fg='#fff', font=('Autobus-Bold', 25))
 titleLabel.place(relx=0.1, rely=0.07, relheight=0.2, relwidth=0.8)
 
 passEntry = Entry(select_sub_main, justify='center', font=('Arial', 15), show='*')
@@ -130,15 +130,15 @@ def on_closing():
 def submit(root):
     img = ImageTk.PhotoImage(Image.open('C:\\Users\\Aman\\PycharmProjects\\Quiz App\\QuizApp_Tk-SQL\\Assets\\DarkLightSwitch\\logo.jpg'))
     questionNumberLabel.configure(image = img)
-    # for q_num in range(numOfQues):
-    #     qStatement = question_statement_entry[q_num].get('1.0', 'end-1c')
-    #     qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, q_num + 1))[0][0]
-    #     if qType == 'mcq' and not qStatement.isspace():
-    #         SQL.execute("UPDATE %s SET question = '%s' WHERE Q_num = %d" % (subject, qStatement[q_num], q_num + 1))
-    #         quizAppDB.commit()
-    #         print(qStatement)
-    #     elif qType == 'true/false' and not qStatement.isspace():
-    #         print(qStatement)
+    for q_num in range(numOfQues):
+        qStatement = question_statement_entry[q_num].get('1.0', 'end-1c')
+        qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, q_num + 1))[0][0]
+        if qType == 'mcq' and not qStatement.isspace():
+            SQL.execute("UPDATE %s SET question = '%s' WHERE Q_num = %d" % (subject, qStatement[q_num], q_num + 1))
+            quizAppDB.commit()
+            print(qStatement)
+        elif qType == 'true/false' and not qStatement.isspace():
+            print(qStatement)
 
 
 select_sub_main.protocol("WM_DELETE_WINDOW", on_closing)

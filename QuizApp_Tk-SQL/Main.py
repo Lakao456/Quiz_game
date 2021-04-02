@@ -5,14 +5,14 @@ import time
 from functools import partial
 from tkinter import *
 from tkinter import messagebox
-
+from tkinter.scrolledtext import *
 import matplotlib.pyplot as plt
 import mysql.connector
 from PIL import ImageTk, Image
 
 global subject
 theme, timeLimit = 'Dark', 100
-marks, name, admin, submitted = 0, '', False, False
+marks, name, admin, submitted, newQuesType = 0, '', False, False, ''
 
 try:
     with open('Scores.json') as f:
@@ -92,13 +92,13 @@ def timer(sec):
         sec -= 1
 
 
-def setSub(sub, root):
+def setSub(sub):
     global subject, name
     if admin:
         if userEntry.get() == '':
             subject = sub
-            root.destroy()
-            root.quit()
+            startMenu.destroy()
+            startMenu.quit()
         else:
             window = Tk()
             window.eval('tk::PlaceWindow %s center' % window.winfo_toplevel())
@@ -110,21 +110,20 @@ def setSub(sub, root):
             window.destroy()
     else:
         subject, name = sub, userEntry.get()
-        root.destroy()
-        root.quit()
+        startMenu.destroy()
+        startMenu.quit()
 
 
 def displayQues(qNum):
-    global questionNumberLabel, questionStatementLabel, optionsFrame, qBtnList
-    for i in range(len(qBtnList)):
+    global questionNumberLabel, questionStatementLabel, optionsFrame, qBtnList, numOfQues
+    for i in range(numOfQues):
         qBtnList[i].config(bg=themeCol('#2d2d2d', '#CCCCCC') if i == qNum else themeCol('#2d2d2d', '#fff'))
     questionNumberLabel.configure(text=f'Q {qNum + 1:d}.')
-    questionStatementLabel.config(text=sql(f"SELECT question FROM {subject} WHERE Q_num = {qNum + 1:d}"),
+    questionStatementLabel.config(text=sql(f"SELECT question FROM {subject} WHERE Q_num = {qNum + 1:d}")[0][0],
                                   font=('Arial', 20))
 
-    qType = sql(f"SELECT qType FROM {subject} WHERE Q_num = {qNum + 1:d};")[0][0]
+    qType = sql(f"SELECT qType FROM {subject} WHERE Q_num = {qNum + 1};")[0][0]
     for i in range(numOfQues):
-        print(opElements[i], opElements[i].keys())
         for j in opElements[i].keys():
             opElements[i][j].place_forget()
 
@@ -196,11 +195,17 @@ def recordAns(qNum, ans):
             opElements[qNum][f'opBtnLabel{i}'].config(
                 bg=(themeCol('#BB86FC', '#6200EE') if i == ans else themeCol('#3C4042', '#8d8d8d')),
                 fg=(themeCol('#BB86FC', '#6200EE') if i == ans else themeCol('#fff', '#121212')))
-            opElements[qNum][f'opBtn{i}'].config(
-                bg=(themeCol('#BB86FC', '#6200EE') if i == ans else themeCol('#3C4042', '#8d8d8d')),
-                fg=(themeCol('#BB86FC', '#6200EE') if i == ans else themeCol('#fff', '#121212')))
+
             if admin:
                 opElements[qNum][f'opLabel{i}'].config(
+                    bg=(themeCol('#251F2D', '#EDE7F6') if i == ans else themeCol('#121212', '#FFF')),
+                    fg=(themeCol('#BB86FC', '#6200EE') if i == ans else themeCol('#fff', '#121212')))
+
+                opElements[qNum][f'opBtn{i}'].config(
+                    bg=(themeCol('#BB86FC', '#6200EE') if i == ans else themeCol('#3C4042', '#8d8d8d')),
+                    fg=(themeCol('#BB86FC', '#6200EE') if i == ans else themeCol('#fff', '#121212')))
+            else:
+                opElements[qNum][f'opBtn{i}'].config(
                     bg=(themeCol('#251F2D', '#EDE7F6') if i == ans else themeCol('#121212', '#FFF')),
                     fg=(themeCol('#BB86FC', '#6200EE') if i == ans else themeCol('#fff', '#121212')))
 
@@ -219,69 +224,154 @@ def submit():
         submitted = True
 
         if admin:
-            print()
+            for qNum in range(numOfQues):
+                newQuesStatement = opElements[qNum]['qEntry'].get('1.0', 'end-1c')
 
-        global marks, name, pie
-        pie = {'Correct': 0, 'Wrong': 0, 'Unattempted': numOfQues}
-        for qNum in range(numOfQues):
-            qType = sql(f"SELECT qType FROM {subject} WHERE Q_num = {qNum + 1:d};")[0][0]
-            if qType == 'mcq':
-                try:
-                    answers[qNum] = chr(97 + answers[qNum])
-                except TypeError:
-                    answers[qNum] = None
+                if newQuesStatement.strip() != '':
+                    SQL.execute(f"UPDATE {subject} SET question = '{newQuesStatement}' WHERE Q_num = {qNum + 1:d}")
 
-            elif qType == 'true/false':
-                answers[qNum] = ('t' if answers[qNum] == 0 else 'f' if answers[qNum] == 1 else None)
-            else:
-                if opElements[qNum]['opEntry'].get() != '':
-                    answers[qNum] = opElements[qNum][1].get()
+                qType = sql("SELECT qType FROM %s WHERE Q_num = %d;" % (subject, qNum + 1))[0][0]
+                if qType == 'mcq':
+                    for eNum in range(4):
+                        newOption = opElements[qNum][f'opEntry{eNum}'].get()
+                        if newOption.strip() != '':
+                            SQL.execute(
+                                f"UPDATE {subject} SET option{chr(65 + eNum)} = '{newOption}' WHERE Q_num = {qNum + 1:d}")
+                    if answers[qNum] is not None:
+                        SQL.execute(
+                            f"UPDATE {subject} SET answer = '{chr(65 + answers[qNum]).lower()}' WHERE Q_num = {qNum + 1:d}")
 
-            if answers[qNum] == sql(f"SELECT answer FROM {subject} WHERE Q_num = {qNum + 1:d}")[0][0]:
-                marks += 4
-                pie['Correct'] += 1
-                pie['Unattempted'] -= 1
+                elif qType == 'true/false' and answers[qNum] is not None:
+                    SQL.execute(f"UPDATE {subject} SET answer = '{answers[qNum]}' WHERE Q_num = {qNum + 1:d}")
 
-            elif answers[qNum] != None:
-                marks -= 1
-                pie['Wrong'] += 1
-                pie['Unattempted'] -= 1
+                elif qType == 'oneWord' and answers[qNum] is not None:
+                    SQL.execute(f"UPDATE {subject} SET answer = '{answers[qNum]}' WHERE Q_num = {qNum + 1:d}")
+            quizAppDB.commit()
+            quizMain.quit()
+            sys.exit()
 
-        window = Tk()
-        window.eval(f'tk::PlaceWindow {window.winfo_toplevel()} center')
-        window.withdraw()
-
-        if (
-                0 if not scores[subject] else (
-                        max([scores[subject][i]['score'] for i in range(len(scores[subject]))]))) >= marks:
-            messagebox.showinfo(title='Score', message=f'Your Score is {marks:d} !')
         else:
-            messagebox.showinfo(title='Score', message=f'NEW TOP SCORE ! \nYour Score is {marks:d}')
+            global marks, name, pie
+            pie = {'Correct': 0, 'Wrong': 0, 'Unattempted': numOfQues}
+            for qNum in range(numOfQues):
 
-        window.deiconify()
-        window.destroy()
-        window.quit()
+                qType = sql(f"SELECT qType FROM {subject} WHERE Q_num = {qNum + 1:d};")[0][0]
+                if qType == 'mcq':
+                    try:
+                        answers[qNum] = chr(97 + answers[qNum])
+                    except TypeError:
+                        answers[qNum] = None
 
-        scores[subject].append({"name": name, "score": marks})
+                elif qType == 'oneWord':
+                    if opElements[qNum]['opEntry'].get() != '':
+                        answers[qNum] = opElements[qNum][1].get()
 
-        with open("ScoresTEMP.json", 'w') as tempFile:
-            json.dump(scores, tempFile, indent=4)
+                if answers[qNum] == sql(f"SELECT answer FROM {subject} WHERE Q_num = {qNum + 1:d}")[0][0]:
+                    marks += 4
+                    pie['Correct'] += 1
+                    pie['Unattempted'] -= 1
 
-        os.remove("Scores.json")
-        os.rename(r'ScoresTEMP.json', r'Scores.json')
+                elif answers[qNum] != None:
+                    marks -= 1
+                    pie['Wrong'] += 1
+                    pie['Unattempted'] -= 1
 
-        timerThread.join()
-        quizMain.destroy()
-        quizMain.quit()
+            window = Tk()
+            window.eval(f'tk::PlaceWindow {window.winfo_toplevel()} center')
+            window.withdraw()
 
-        plt.pie([pie['Correct'], pie['Wrong'], pie['Unattempted']], labels=pie.keys(), autopct='%.2f',
-                explode=[0.05, 0.05, 0], colors=['#99ff99', '#ff9999', '#66b3ff'])
+            if (
+                    0 if not scores[subject] else (
+                            max([scores[subject][i]['score'] for i in range(len(scores[subject]))]))) >= marks:
+                messagebox.showinfo(title='Score', message=f'Your Score is {marks:d} !')
+            else:
+                messagebox.showinfo(title='Score', message=f'NEW TOP SCORE ! \nYour Score is {marks:d}')
 
-        plt.show()
+            window.deiconify()
+            window.destroy()
+            window.quit()
+
+            scores[subject].append({"name": name, "score": marks})
+
+            with open("ScoresTEMP.json", 'w') as tempFile:
+                json.dump(scores, tempFile, indent=4)
+
+            os.remove("Scores.json")
+            os.rename(r'ScoresTEMP.json', r'Scores.json')
+
+            timerThread.join()
+            quizMain.destroy()
+            quizMain.quit()
+
+            plt.pie([pie['Correct'], pie['Wrong'], pie['Unattempted']], labels=pie.keys(), autopct='%.2f',
+                    explode=[0.05, 0.05, 0], colors=['#99ff99', '#ff9999', '#66b3ff'])
+
+            plt.show()
+            sys.exit()
+
+
+def addQues():
+    global numOfQues, qBtnY, qBtnList, newQuesType
+
+    def setTyp(type):
+        global newQuesType
+        newQuesType = type
+        quesType.destroy()
+        quesType.quit()
+
+    quesType = Tk()
+    quesType.title('TESTS')
+    quesType.geometry('400x400')
+    quesType.configure(bg="#000")
+
+    typeTopFrame = Frame(quesType, bg='#85c6dd')
+    typeTopFrame.place(relx=0.1, rely=0.03, relheight=0.3, relwidth=0.8)
+
+    typeTitleLabel = Label(typeTopFrame, text='Select Question\n Type', bg='#85c6dd', fg='#fff',
+                           font=('Autobus-Bold', 20))
+    typeTitleLabel.place(relx=0.1, rely=0.07, relheight=0.8, relwidth=0.8)
+
+    typeMidFrame = Frame(quesType, bg='#85c6dd')
+    typeMidFrame.place(relx=0.1, rely=0.35, relwidth=0.8, relheight=0.6, anchor='nw')
+
+    y = 0.12
+    typeButtons = ['mcq', 'true/false', 'one Word']
+    for i in range(len(typeButtons)):
+        typeButtons[i] = Button(typeMidFrame, text=typeButtons[i].upper(), font=('Autobus', 15),
+                                command=partial(setTyp, typeButtons[i].replace(" ", "")))
+        typeButtons[i].place(relx=0.1, rely=y, relwidth=0.8, relheight=0.2)
+        y += 0.25
+
+
+    def on_closing():
+        if messagebox.askokcancel("Quit", "Do you want to quit?"):
+            sys.exit()
+
+    quesType.protocol("WM_DELETE_WINDOW", on_closing)
+    quesType.mainloop()
+
+    qBtnList.append(
+        Button(questionButtonsFrame, text=str(numOfQues + 1), relief='ridge', fg=themeCol('#fff', '#1c1c1c'),
+               bg=themeCol('#2d2d2d', '#fff'),
+               command=partial(displayQues, numOfQues)))
+    qBtnList[numOfQues].place(relx=(0.03 if numOfQues % 2 == 0 else 0.5), rely=qBtnY, relwidth=0.45, relheight=0.085)
+    if numOfQues % 2 != 0: qBtnY += 0.1
+    numOfQues += 1
+
+    SQL.execute(
+        f"INSERT INTO {subject} VALUES({numOfQues}, 'Question Statement', '{newQuesType}', NULL, NULL, NULL, NULL, 'a')")
+    quizAppDB.commit()
+    opElements.append({})
+    answers.append(None)
+    createOpElemAdmin(numOfQues - 1)
+
+
+def delQues():
+    print()
 
 
 startMenu = Tk()
-startMenu.title('TESTS')
+startMenu.title('START MENU')
 startMenu.geometry('400x600')
 startMenu.configure(bg="#000")  # 85c6dd
 
@@ -301,6 +391,7 @@ midFrame = Frame(startMenu, bg='#85c6dd')
 midFrame.place(relx=0.1, rely=0.34, relwidth=0.8, relheight=0.4, anchor='nw')
 
 subButtons, y = ['maths', 'sci', 'gk'], 0.12
+
 for i in range(len(subButtons)):
     highScore = (0 if not scores[subButtons[i]] else (
         max([scores[subButtons[i]][j]['score'] for j in range(len(scores[subButtons[i]]))])))
@@ -308,7 +399,7 @@ for i in range(len(subButtons)):
         max([scores[subButtons[i]][j]['name'] for j in range(len(scores[subButtons[i]]))])))
 
     subButtons[i] = Button(midFrame, text=subButtons[i].upper(), font=('Autobus', 15),
-                           command=partial(setSub, subButtons[i], startMenu))
+                           command=partial(setSub, subButtons[i]))
     subButtons[i].place(relx=0.02, rely=y, relwidth=0.5, relheight=0.2)
 
     highScoreLabel = Label(midFrame, bg='#ffffff', text=f'Top Score:: {highScore:d} \nBy {highName} ',
@@ -334,9 +425,8 @@ def on_closing():
 startMenu.protocol("WM_DELETE_WINDOW", on_closing)
 startMenu.mainloop()
 
-print(f"Admin: {admin}")
 quizMain = Tk()
-quizMain.title('TESTS')
+quizMain.title(f'{subject.upper()} QUIZ')
 quizMain.geometry('1000x700')
 
 bgImage = Label(quizMain)
@@ -363,61 +453,70 @@ for i in range(numOfQues):
     opElements.append({})
     answers.append(None)
 
+
+def createOpElemAdmin(qNum):
+    global opElements
+    opElements[qNum]['qEntry'] = ScrolledText(quizMain, bg=themeCol('#121212', '#fff'),
+                                              fg=themeCol('#fff', '#121212'),
+                                              insertbackground=themeCol('#fff', '#000'),
+                                              font=('Montserrat', 15))
+    qType = sql(f"SELECT qType FROM {subject} WHERE Q_num = {qNum + 1:d};")[0][0]
+    if qType == 'mcq':
+        for eNum in range(4):
+            ansMatchMcq = (True if sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, qNum + 1))[0][0] == chr(
+                65 + eNum).lower() else False)
+
+            opElements[qNum][f'opBtnLabel{eNum}'] = Label(optionsFrame, bg=themeCol('#BB86FC', '#6200EE')
+            if ansMatchMcq else themeCol('#3C4042', '#8d8d8d'))
+
+            opElements[qNum][f'opLabel{eNum}'] = Label(optionsFrame, text=
+            sql(f"SELECT option{chr(65 + eNum)} FROM {subject} WHERE Q_num = {qNum + 1:d}")[0][0],
+                                                       bg=themeCol('#251F2D', '#EDE7F6') if ansMatchMcq
+                                                       else themeCol('#121212', '#fff'),
+                                                       highlightthickness=0, bd=0,
+                                                       fg=themeCol('#fff', '#121212'), font=('Montserrat', 18))
+
+            opElements[qNum][f'opEntry{eNum}'] = Entry(optionsFrame, bg=themeCol('#121212', '#fff'),
+                                                       fg=themeCol('#fff', '#121212'),
+                                                       insertbackground=themeCol('#fff', '#000'),
+                                                       font=('Montserrat', 13))
+
+            opElements[qNum][f'opBtn{eNum}'] = Button(optionsFrame,
+                                                      bg=themeCol('#BB86FC', '#6200EE') if ansMatchMcq
+                                                      else themeCol('#3C4042', '#8d8d8d'),
+                                                      highlightthickness=0, bd=0,
+                                                      command=partial(recordAns, qNum, eNum))
+
+    elif qType == 'true/false':
+        tfL = ['t', 'f']
+        for eNum in range(2):
+            ansMatchTf = (True if sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, qNum + 1))[0][0] == tfL[
+                eNum] else False)
+
+            opElements[qNum][f'opBtnLabel{eNum}'] = Label(optionsFrame, bg=themeCol('#BB86FC', '#6200EE') if
+            ansMatchTf else themeCol('#fff', '#121212'))
+
+            opElements[qNum][f'opBtn{eNum}'] = Button(optionsFrame, text=('True' if eNum == 0 else 'False'),
+                                                      bg=themeCol('#251F2D', '#EDE7F6') if
+                                                      ansMatchTf else themeCol('#121212', '#fff'),
+                                                      fg=themeCol('#BB86FC', '#6200EE') if
+                                                      ansMatchTf else themeCol('#fff', '#121212'),
+                                                      highlightthickness=0, bd=0,
+                                                      font=('Montserrat', 18),
+                                                      command=partial(recordAns, qNum, eNum))
+    else:
+        opElements[qNum]['opLabel'] = Label(optionsFrame, text='Enter your answer', bg=themeCol('#121212', '#fff'),
+                                            fg=themeCol('#fff', '#121212'), font=('Montserrat', 14))
+        opElements[qNum]['opEntry'] = Entry(optionsFrame, bg=themeCol('#121212', '#fff'),
+                                            fg=themeCol('#fff', '#121212'),
+                                            insertbackground=themeCol('#fff', '#000'),
+                                            font=('Montserrat', 13))
+
+
 if admin:
     questionStatementLabel.place(relx=0.25, rely=0.07, relheight=0.12, relwidth=0.72, anchor='nw')
     for qNum in range(numOfQues):
-        opElements[qNum]['qEntry'] = Entry(quizMain, bg=themeCol('#121212', '#fff'),
-                                           fg=themeCol('#fff', '#121212'),
-                                           font=('Montserrat', 15))
-        qType = sql(f"SELECT qType FROM {subject} WHERE Q_num = {qNum + 1:d};")[0][0]
-        if qType == 'mcq':
-            for eNum in range(4):
-                ansMatchMcq = (True if sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, qNum + 1))[0][0] == chr(
-                    65 + eNum).lower() else False)
-
-                print(ansMatchMcq)
-                opElements[qNum][f'opBtnLabel{eNum}'] = Label(optionsFrame, bg=themeCol('#BB86FC',
-                                                                                        '#6200EE') if ansMatchMcq else themeCol(
-                    '#3C4042', '#8d8d8d'))
-                opElements[qNum][f'opLabel{eNum}'] = Label(optionsFrame, text=
-                sql(f"SELECT option{chr(65 + eNum)} FROM {subject} WHERE Q_num = {qNum + 1:d}")[0][0],
-                                                           bg=themeCol('#251F2D',
-                                                                       '#EDE7F6') if ansMatchMcq else themeCol(
-                                                               '#121212', '#fff'),
-                                                           highlightthickness=0, bd=0,
-                                                           fg=themeCol('#fff', '#121212'), font=('Montserrat', 18))
-
-                opElements[qNum][f'opEntry{eNum}'] = Entry(optionsFrame)
-
-                opElements[qNum][f'opBtn{eNum}'] = Button(optionsFrame,
-                                                          bg=themeCol('#BB86FC',
-                                                                      '#6200EE') if ansMatchMcq else themeCol('#3C4042',
-                                                                                                              '#8d8d8d'),
-                                                          highlightthickness=0, bd=0,
-                                                          command=partial(recordAns, qNum, eNum))
-
-        elif qType == 'true/false':
-            tfL = ['t', 'f']
-            for eNum in range(2):
-                ansMatchTf = (True if sql("SELECT answer FROM %s WHERE Q_num = %d" % (subject, qNum + 1))[0][0] == tfL[
-                    eNum] else False)
-                opElements[qNum][f'opBtnLabel{eNum}'] = Label(optionsFrame, bg=themeCol('#BB86FC', '#6200EE') if
-                ansMatchTf else themeCol('#fff', '#121212'))
-
-                opElements[qNum][f'opBtn{eNum}'] = Button(optionsFrame, text=('True' if eNum == 0 else 'False'),
-                                                          bg=themeCol('#251F2D', '#EDE7F6') if
-                                                          ansMatchTf else themeCol('#121212', '#fff'),
-                                                          highlightthickness=0, bd=0,
-                                                          fg=themeCol('#BB86FC', '#6200EE') if
-                                                          ansMatchTf else themeCol('#fff', '#121212'),
-                                                          font=('Montserrat', 18),
-                                                          command=partial(recordAns, qNum, eNum))
-        else:
-            opElements[qNum]['opLabel'] = Label(optionsFrame, text='Enter your answer', bg=themeCol('#121212', '#fff'),
-                                                fg=themeCol('#fff', '#121212'), font=('Montserrat', 14))
-            opElements[qNum]['opEntry'] = Entry(optionsFrame, bg=themeCol('#121212', '#fff'),
-                                                fg=themeCol('#fff', '#121212'),
-                                                font=('Montserrat', 13))
+        createOpElemAdmin(qNum)
 else:
     for qNum in range(numOfQues):
         qType = sql(f"SELECT qType FROM {subject} WHERE Q_num = {qNum + 1:d};")[0][0]
@@ -439,13 +538,16 @@ else:
                                                           bg=themeCol('#121212', '#fff'),
                                                           highlightthickness=0, bd=0,
                                                           fg=themeCol('#fff', '#121212'), font=('Montserrat', 18),
-                                                          command=partial(recordAns, qNum, eNum))
+                                                          command=partial(recordAns, qNum, (
+                                                              't' if answers[qNum] == 0 else 'f' if answers[
+                                                                                                        qNum] == 1 else None)))
 
         else:
             opElements[qNum]['opLabel'] = Label(optionsFrame, text='Enter your answer', bg=themeCol('#121212', '#fff'),
                                                 fg=themeCol('#fff', '#121212'), font=('Montserrat', 14))
             opElements[qNum]['opEntry'] = Entry(optionsFrame, bg=themeCol('#121212', '#fff'),
                                                 fg=themeCol('#fff', '#121212'),
+                                                insertbackground=themeCol('#fff', '#000'),
                                                 font=('Montserrat', 13))
 
 submitButton = Button(quizMain, text=('APPLY' if admin else 'SUBMIT'), command=submit, bg='#03DAC6',
@@ -453,25 +555,24 @@ submitButton = Button(quizMain, text=('APPLY' if admin else 'SUBMIT'), command=s
                       activebackground='#03DAC6', fg="#fff")
 submitButton.place(relx=0.835, rely=0.87, relheight=0.095, relwidth=0.15, anchor='nw')
 
-qBtnLen, qBtnList, y = numOfQues, [], 0.005
-for i in range(qBtnLen):
-    qBtnList.append(Button(questionButtonsFrame, text=str(i + 1), relief=''
-                                                                         'ridge', fg=themeCol('#fff', '#1c1c1c'),
+qBtnList, qBtnY = [], 0.005
+for i in range(numOfQues):
+    qBtnList.append(Button(questionButtonsFrame, text=str(i + 1), relief='ridge', fg=themeCol('#fff', '#1c1c1c'),
                            bg=themeCol('#2d2d2d', '#fff'),
                            command=partial(displayQues, i)))
-    qBtnList[i].place(relx=(0.03 if i % 2 == 0 else 0.5), rely=y, relwidth=0.45, relheight=0.085)
-    if i % 2 != 0: y += 0.1
+    qBtnList[i].place(relx=(0.03 if i % 2 == 0 else 0.5), rely=qBtnY, relwidth=0.45, relheight=0.085)
+    if i % 2 != 0: qBtnY += 0.1
 
 if admin:
     questionStatementLabel.place(relx=0.25, rely=0.06, relheight=0.09, relwidth=0.72, anchor='nw')
 
     addButton = Button(quizMain, text='+', bg=themeCol('#BB86FC', '#6200EE'), fg='#fff', highlightthickness=0, bd=0,
-                       font=('Montserrat-Semibold', 50))
-    addButton.place(relx=0.26, rely=0.87, relheight=0.075, relwidth=0.075, anchor='nw')
+                       font=('Montserrat-Semibold', 50), command=addQues)
+    addButton.place(relx=0.26, rely=0.878, relheight=0.075, relwidth=0.075, anchor='nw')
 
     delButton = Button(quizMain, text='-', bg=themeCol('#BB86FC', '#6200EE'), fg='#fff',
-                       highlightthickness=0, bd=0, font=('Arial-Bold', 50))
-    delButton.place(relx=0.34, rely=0.87, relheight=0.075, relwidth=0.075, anchor='nw')
+                       highlightthickness=0, bd=0, font=('Arial-Bold', 50), command=delQues)
+    delButton.place(relx=0.34, rely=0.878, relheight=0.075, relwidth=0.075, anchor='nw')
 else:
     questionStatementLabel.place(relx=0.25, rely=0.1, relheight=0.15, relwidth=0.72, anchor='nw')
 
