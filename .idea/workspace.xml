@@ -4,8 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="Integrated Admin options in Main.py&#10;Not connected to sql actions yet">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="Add Question Function added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" afterDir="false" />
@@ -193,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617232636612</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add Question Function added">
+      <created>1617381775647</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1617381775647</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,14 +220,15 @@
     <MESSAGE value="Added Admin and theme switch buttons" />
     <MESSAGE value="Removed Pictures for buttons&#10;Used frame in bg for border effect" />
     <MESSAGE value="Integrated Admin options in Main.py&#10;Not connected to sql actions yet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Integrated Admin options in Main.py&#10;Not connected to sql actions yet" />
+    <MESSAGE value="Add Question Function added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Question Function added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>557</line>
+          <line>574</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -233,11 +240,6 @@
           <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
           <line>121</line>
           <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>116</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
