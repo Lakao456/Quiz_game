@@ -4,16 +4,49 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="Add Question Function added">
+    <list default="true" id="f2c059f2-5588-4eb9-8f7d-c4d425d517bc" name="Default Changelist" comment="Delete question Function added (END OF VERSION 3)">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exportToHTML/Main.py.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Simple/QUIZ_GAME.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Simple/Questions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Simple/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/hash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_StandAlone.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Dark_BG.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dark_BG.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Light_BG.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Light_BG.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Assets/Light_Shadow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_ques.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/SQL_Scripts/Clear_all_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_Scripts/Clear_all_tables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/SQL_Scripts/Create_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_Scripts/Create_tables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/SQL_Scripts/Insert_fake_values.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_Scripts/Insert_fake_values.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/SQL_Scripts/MISC.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_Scripts/MISC.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/SQL_Scripts/Open_table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SQL_Scripts/Open_table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/Scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/Scores.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/bgTest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizApp_Tk-SQL/testSQL.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="1" />
+    <option name="PRINT_LINE_NUMBERS" value="true" />
+    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,15 +82,17 @@
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\amans\PycharmProjects\Quiz_game" />
+      <recent name="C:\Users\amans\PycharmProjects\Quiz_game\QuizApp_Simple" />
       <recent name="C:\Users\amans\PycharmProjects\Quiz_game\QuizApp_Tk-SQL\Assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Main">
-    <configuration name="Edit_Ques_GUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.hash">
+    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Quiz App" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -65,11 +100,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QuizApp_Tk-SQL" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QuizApp_Tk-SQL/Edit_Ques_GUI.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -78,7 +113,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="hash" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Quiz App" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -86,11 +121,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QuizApp_Tk-SQL" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hash.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -99,59 +134,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Quiz App" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\amans\AppData\Local\Programs\Python\Python37\python.exe" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="testSQL" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Quiz App" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QuizApp_Tk-SQL" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QuizApp_Tk-SQL/testSQL.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Python.Unnamed" />
-      <item itemvalue="Python.Edit_Ques_GUI" />
-      <item itemvalue="Python.Main" />
-      <item itemvalue="Python.testSQL" />
-    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.hash" />
         <item itemvalue="Python.Main" />
-        <item itemvalue="Python.Edit_Ques_GUI" />
-        <item itemvalue="Python.testSQL" />
+        <item itemvalue="Python.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -199,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617381775647</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Delete question Function added (END OF VERSION 3)">
+      <created>1617395639464</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1617395639464</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,25 +215,16 @@
     <MESSAGE value="Removed Pictures for buttons&#10;Used frame in bg for border effect" />
     <MESSAGE value="Integrated Admin options in Main.py&#10;Not connected to sql actions yet" />
     <MESSAGE value="Add Question Function added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Question Function added" />
+    <MESSAGE value="Delete question Function added (END OF VERSION 3)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete question Function added (END OF VERSION 3)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>574</line>
+          <url>file://$PROJECT_DIR$/Main.py</url>
+          <line>580</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>360</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizApp_Tk-SQL/Main.py</url>
-          <line>121</line>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

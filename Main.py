@@ -1,17 +1,19 @@
-import json
 import os
-import threading
+import json
 import time
-from functools import partial
+import pickle
+import hashlib
+import threading
 from tkinter import *
-from tkinter import messagebox
-from tkinter.scrolledtext import *
-import matplotlib.pyplot as plt
 import mysql.connector
+from functools import partial
 from PIL import ImageTk, Image
+from tkinter import messagebox
+import matplotlib.pyplot as plt
+from tkinter.scrolledtext import *
 
 global subject
-theme, timeLimit = 'Dark', 100
+theme, timeLimit = 'Light', 100
 marks, name, admin, submitted, newQuesType = 0, '', False, False, ''
 
 try:
@@ -85,7 +87,7 @@ def insert_image(imageObject, image, adjW=0, adjH=0):
 
 
 def timer(sec):
-    while sec > 0:
+    while sec > 0 and not submitted:
         min = sec // 60
         timerLabel.config(text=f"{min if min > 9 else '0' + str(min)}:{sec if sec > 9 else '0' + str(sec)}")
         time.sleep(1)
@@ -95,7 +97,7 @@ def timer(sec):
 def setSub(sub):
     global subject, name
     if admin:
-        if userEntry.get() == '':
+        if hashlib.md5(userEntry.get().encode()).hexdigest() == pickle.load(open("password.DAT", 'rb')):
             subject = sub
             startMenu.destroy()
             startMenu.quit()
@@ -117,7 +119,7 @@ def setSub(sub):
 def displayQues(qNum):
     global questionNumberLabel, questionStatementLabel, optionsFrame, numOfQues
     for i in range(numOfQues):
-        qElements[i]['qBtn'].config(bg=themeCol('#2d2d2d', '#CCCCCC') if i == qNum else themeCol('#2d2d2d', '#fff'))
+        qBtnList[i].config(bg=themeCol('#2d2d2d', '#CCCCCC') if i == qNum else themeCol('#2d2d2d', '#fff'))
     questionNumberLabel.configure(text=f'Q {qNum + 1:d}.')
     questionStatementLabel.config(text=sql(f"SELECT question FROM {subject} WHERE Q_num = {qNum + 1:d}")[0][0],
                                   font=('Arial', 20))
@@ -125,8 +127,7 @@ def displayQues(qNum):
     qType = sql(f"SELECT qType FROM {subject} WHERE Q_num = {qNum + 1};")[0][0]
     for i in range(numOfQues):
         for j in qElements[i].keys():
-            if j not in 'qBtn':
-                qElements[i][j].place_forget()
+            qElements[i][j].place_forget()
 
     if admin:
         qElements[qNum]['qEntry'].place(relx=0.25, rely=0.17, relheight=0.08, relwidth=0.72, anchor='nw')
@@ -246,8 +247,10 @@ def submit():
                 elif qType == 'true/false' and answers[qNum] is not None:
                     SQL.execute(f"UPDATE {subject} SET answer = '{answers[qNum]}' WHERE Q_num = {qNum + 1:d}")
 
-                elif qType == 'oneWord' and answers[qNum] is not None:
-                    SQL.execute(f"UPDATE {subject} SET answer = '{answers[qNum]}' WHERE Q_num = {qNum + 1:d}")
+                elif qType == 'oneWord':
+                    if qElements[qNum]['opEntry'].get().strip() != '':
+                        answers[qNum] = qElements[qNum]['opEntry'].get()
+                        SQL.execute(f"UPDATE {subject} SET answer = '{answers[qNum]}' WHERE Q_num = {qNum + 1:d}")
             quizAppDB.commit()
             quizMain.quit()
             sys.exit()
@@ -265,15 +268,15 @@ def submit():
                         answers[qNum] = None
 
                 elif qType == 'oneWord':
-                    if qElements[qNum]['opEntry'].get() != '':
-                        answers[qNum] = qElements[qNum]['opEntry'].get()
+                    if qElements[qNum]['opEntry'].get().strip() != '':
+                        answers[qNum] = qElements[qNum]['opEntry'].get().lower()
 
-                if answers[qNum] == sql(f"SELECT answer FROM {subject} WHERE Q_num = {qNum + 1:d}")[0][0]:
+                if answers[qNum] == sql(f"SELECT answer FROM {subject} WHERE Q_num = {qNum + 1:d}")[0][0].lower():
                     marks += 4
                     pie['Correct'] += 1
                     pie['Unattempted'] -= 1
 
-                elif answers[qNum] != None:
+                elif answers[qNum] is not None:
                     marks -= 1
                     pie['Wrong'] += 1
                     pie['Unattempted'] -= 1
@@ -301,7 +304,6 @@ def submit():
             os.remove("Scores.json")
             os.rename(r'ScoresTEMP.json', r'Scores.json')
 
-            timerThread.join()
             quizMain.destroy()
             quizMain.quit()
 
@@ -351,12 +353,11 @@ def addQues():
     quesType.protocol("WM_DELETE_WINDOW", on_closing)
     quesType.mainloop()
 
-    qElements[numOfQues]['qBtn'] = Button(questionButtonsFrame, text=str(numOfQues + 1), relief='ridge',
-                                          fg=themeCol('#fff', '#1c1c1c'),
-                                          bg=themeCol('#2d2d2d', '#fff'),
-                                          command=partial(displayQues, numOfQues))
-    qElements[numOfQues]['qBtn'].place(relx=(0.03 if numOfQues % 2 == 0 else 0.5), rely=qBtnY, relwidth=0.45,
-                                       relheight=0.085)
+    qBtnList.append(
+        Button(questionButtonsFrame, text=str(numOfQues + 1), relief='ridge', fg=themeCol('#fff', '#1c1c1c'),
+               bg=themeCol('#2d2d2d', '#fff'),
+               command=partial(displayQues, numOfQues)))
+    qBtnList[numOfQues].place(relx=(0.03 if numOfQues % 2 == 0 else 0.5), rely=qBtnY, relwidth=0.45, relheight=0.085)
     if numOfQues % 2 != 0: qBtnY += 0.1
     numOfQues += 1
 
@@ -371,13 +372,18 @@ def addQues():
 def delQues(qNum):
     global qElements, numOfQues
     if messagebox.askokcancel("Delete Question", "Do you want to delete this question?"):
-        print(f'DELETE FROM {subject} WHERE Q_num = {qNum + 1}')
+        SQL.execute(f'DELETE FROM {subject} WHERE Q_num = {qNum + 1}')
         for elem in qElements[qNum].keys():
             qElements[qNum][elem].place_forget()
+            qBtnList[-1].place_forget()
+        qBtnList.pop()
         qElements.pop(qNum)
         numOfQues -= 1
+        displayQues(qNum - 1)
         for i in range(qNum, numOfQues):
-            print(f'UPDATE {subject} SET Q_num = {i + 1} WHERE Q_num = {i + 2}')
+            SQL.execute(f'UPDATE {subject} SET Q_num = {i + 1} WHERE Q_num = {i + 2}')
+            qBtnList[i].config(command=partial(displayQues, i))
+    quizAppDB.commit()
 
 
 startMenu = Tk()
@@ -572,12 +578,12 @@ submitButton = Button(quizMain, text=('APPLY' if admin else 'SUBMIT'), command=s
                       activebackground='#03DAC6', fg="#fff")
 submitButton.place(relx=0.835, rely=0.87, relheight=0.095, relwidth=0.15, anchor='nw')
 
-qBtnY = 0.005
+qBtnList, qBtnY = [], 0.005
 for i in range(numOfQues):
-    qElements[i]['qBtn'] = Button(questionButtonsFrame, text=str(i + 1), relief='ridge', fg=themeCol('#fff', '#1c1c1c'),
-                                  bg=themeCol('#2d2d2d', '#fff'),
-                                  command=partial(displayQues, i))
-    qElements[i]['qBtn'].place(relx=(0.03 if i % 2 == 0 else 0.5), rely=qBtnY, relwidth=0.45, relheight=0.085)
+    qBtnList.append(Button(questionButtonsFrame, text=str(i + 1), relief='ridge', fg=themeCol('#fff', '#1c1c1c'),
+                           bg=themeCol('#2d2d2d', '#fff'),
+                           command=partial(displayQues, i)))
+    qBtnList[i].place(relx=(0.03 if i % 2 == 0 else 0.5), rely=qBtnY, relwidth=0.45, relheight=0.085)
     if i % 2 != 0:
         qBtnY += 0.1
 

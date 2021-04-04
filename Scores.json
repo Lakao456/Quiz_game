@@ -1,0 +1,28 @@
+{
+    "maths": [
+        {
+            "name": "",
+            "score": 0
+        },
+        {
+            "name": "Aman",
+            "score": 3
+        }
+    ],
+    "sci": [
+        {
+            "name": "Saanika",
+            "score": 4
+        }
+    ],
+    "gk": [
+        {
+            "name": "Bhav",
+            "score": 0
+        },
+        {
+            "name": "Bhav",
+            "score": 5
+        }
+    ]
+}
